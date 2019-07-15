@@ -1,7 +1,3 @@
-jQuery('#qrcodeCanvas').qrcode({
-  text: "http://jetienne.com/"
-});
-
 Dropzone.autoDiscover = false;
 
 function getExtention(fname) {
@@ -173,25 +169,6 @@ var vm = new Vue({
       }
       var urlPath = location.protocol + "//" + pathJoin(parts);
       return noEncode ? urlPath : encodeURI(urlPath);
-    },
-    genQrcode: function (name, title) {
-      var urlPath = this.genInstallURL(name, true);
-      $("#qrcode-title").html(title || name || location.pathname);
-      $("#qrcode-link").attr("href", urlPath);
-      $('#qrcodeCanvas').empty().qrcode({
-        text: encodeURI(urlPath),
-      });
-
-      $("#qrcodeRight a").attr("href", urlPath);
-      $("#qrcode-modal").modal("show");
-    },
-    genDownloadURL: function (f) {
-      var search = location.search;
-      var sep = search == "" ? "?" : "&"
-      return location.origin + "/" + f.path + location.search + sep + "download=true";
-    },
-    shouldHaveQrcode: function (name) {
-      return ['apk', 'ipa'].indexOf(getExtention(name)) !== -1;
     },
     genFileClass: function (f) {
       if (f.type == "dir") {
